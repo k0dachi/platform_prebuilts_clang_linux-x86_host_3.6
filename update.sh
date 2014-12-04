@@ -15,7 +15,8 @@ done
 
 # Copy libraries
 echo Copying libc++.so
-cp -a ${ANDROID_HOST_OUT}/lib64/libc++.so lib/
+cp -a ${ANDROID_HOST_OUT}/lib/libc++.so lib/
+cp -a ${ANDROID_HOST_OUT}/lib64/libc++.so lib64/
 
 # Copy header files
 rm -rf lib/clang/*/include/*
