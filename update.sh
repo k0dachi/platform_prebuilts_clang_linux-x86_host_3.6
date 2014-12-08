@@ -39,6 +39,9 @@ echo Copying ASan libraries
 LIBS=$(echo lib/clang/*)/lib/linux
 cp -a ${ANDROID_HOST_OUT}/obj/STATIC_LIBRARIES/libasan_intermediates/libasan.a \
   ${LIBS}/libclang_rt.asan-x86_64.a
+cp -a ${ANDROID_HOST_OUT}/obj/STATIC_LIBRARIES/libasan_cxx_intermediates/libasan_cxx64.a \
+  ${LIBS}/libclang_rt.asan_cxx-x86_64.a
 cp -a ${ANDROID_HOST_OUT}/obj32/STATIC_LIBRARIES/libasan_intermediates/libasan.a \
-  ${LIBS}/libclang_rt.asan-i386.a
-
+  ${LIBS}/libclang_rt.asan-i686.a
+cp -a ${ANDROID_HOST_OUT}/obj32/STATIC_LIBRARIES/libasan_cxx_intermediates/libasan_cxx32.a \
+  ${LIBS}/libclang_rt.asan_cxx-i686.a
