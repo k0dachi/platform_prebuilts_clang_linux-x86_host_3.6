@@ -25,26 +25,12 @@ for i in `find ${ANDROID_BUILD_TOP}/external/clang/lib/Headers -mindepth 1 ! -na
   cp -a $i lib/clang/*/include/
 done
 
-echo Copying sanitizer headers
-cp -a ${ANDROID_BUILD_TOP}/external/compiler-rt/include/sanitizer lib/clang/*/include/
-
 # Copy over stdatomic.h from bionic
 echo Copying stdatomic.h
 cp -a ${ANDROID_BUILD_TOP}/bionic/libc/include/stdatomic.h lib/clang/*/include/
 
 echo Copying arm_neon.h
 cp -a `find ${ANDROID_PRODUCT_OUT} -name arm_neon.h | head -n 1` lib/clang/*/include
-
-echo Copying ASan libraries
-LIBS=$(echo lib/clang/*)/lib/linux
-cp -a ${ANDROID_HOST_OUT}/obj/STATIC_LIBRARIES/libasan_intermediates/libasan.a \
-  ${LIBS}/libclang_rt.asan-x86_64.a
-cp -a ${ANDROID_HOST_OUT}/obj/STATIC_LIBRARIES/libasan_cxx_intermediates/libasan_cxx64.a \
-  ${LIBS}/libclang_rt.asan_cxx-x86_64.a
-cp -a ${ANDROID_HOST_OUT}/obj32/STATIC_LIBRARIES/libasan_intermediates/libasan.a \
-  ${LIBS}/libclang_rt.asan-i686.a
-cp -a ${ANDROID_HOST_OUT}/obj32/STATIC_LIBRARIES/libasan_cxx_intermediates/libasan_cxx32.a \
-  ${LIBS}/libclang_rt.asan_cxx-i686.a
 
 function copy_profile_rt() {
   target=$1
@@ -73,3 +59,5 @@ copy_profile_rt generic_x86_64 x86_64
 
 copy_host_profile_rt x86_64
 copy_host_profile_rt i686 32
+
+sh update-sanitizers.sh
