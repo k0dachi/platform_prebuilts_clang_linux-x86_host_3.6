@@ -45,3 +45,31 @@ cp -a ${ANDROID_HOST_OUT}/obj32/STATIC_LIBRARIES/libasan_intermediates/libasan.a
   ${LIBS}/libclang_rt.asan-i686.a
 cp -a ${ANDROID_HOST_OUT}/obj32/STATIC_LIBRARIES/libasan_cxx_intermediates/libasan_cxx32.a \
   ${LIBS}/libclang_rt.asan_cxx-i686.a
+
+function copy_profile_rt() {
+  target=$1
+  arch=$2
+  obj=${ANDROID_BUILD_TOP}/out/target/product/${target}/obj/STATIC_LIBRARIES
+  libdir=$(echo lib/clang/*)/lib/linux
+  lib=${libdir}/libclang_rt.profile-${arch}-android.a
+  cp -a ${obj}/libprofile_rt_intermediates/libprofile_rt.a ${lib}
+}
+
+function copy_host_profile_rt() {
+  arch=$1
+  obj_suffix=$2
+  obj=${ANDROID_BUILD_TOP}/out/host/linux-x86/obj$obj_suffix/STATIC_LIBRARIES
+  libdir=$(echo lib/clang/*)/lib/linux
+  lib=${libdir}/libclang_rt.profile-${arch}.a
+  cp -a ${obj}/libprofile_rt_intermediates/libprofile_rt.a ${lib}
+}
+
+copy_profile_rt generic arm
+copy_profile_rt generic_arm64 aarch64
+copy_profile_rt generic_mips mipsel
+copy_profile_rt generic_mips64 mips64el
+copy_profile_rt generic_x86 i686
+copy_profile_rt generic_x86_64 x86_64
+
+copy_host_profile_rt x86_64
+copy_host_profile_rt i686 32
