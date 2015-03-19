@@ -33,7 +33,7 @@ echo Copying stdatomic.h
 cp -a ${ANDROID_BUILD_TOP}/bionic/libc/include/stdatomic.h lib/clang/*/include/
 
 echo Copying arm_neon.h
-cp -a `find ${ANDROID_PRODUCT_OUT} -name arm_neon.h` lib/clang/*/include
+cp -a `find ${ANDROID_PRODUCT_OUT} -name arm_neon.h | head -n 1` lib/clang/*/include
 
 echo Copying ASan libraries
 LIBS=$(echo lib/clang/*)/lib/linux
