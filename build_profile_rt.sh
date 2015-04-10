@@ -24,7 +24,6 @@ cd $ANDROID_BUILD_TOP/external/compiler-rt && mma -j$NUM_CORES || exit 1
 # build_profile_rt aosp_arm64-userdebug
 build_profile_rt aosp_arm-userdebug
 build_profile_rt aosp_mips-userdebug
-# FIXME: mips64 doesn't build properly yet
-# build_profile_rt aosp_mips64-userdebug
+build_profile_rt aosp_mips64-userdebug
 build_profile_rt aosp_x86-userdebug
 build_profile_rt aosp_x86_64-userdebug
